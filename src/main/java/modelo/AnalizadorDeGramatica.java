@@ -106,9 +106,14 @@ public class AnalizadorDeGramatica {
                 if (verificarCadena(cadenas[j])) { // Analiza si hay una letra mayuscula seguida opcionalmente con apostrofe
                     // Lee la cadena encontrando todas las coincidencias del tipo "A" o "A'" para guardar en el conjunto
                     // de variables la letra encontrada
-                    mayusApost = verificarCadenaMayusApost(cadenas[j]);// Analiza si hay una letra mayuscula seguida por un apostrofe
                     extraerVariables(cadenas[j]); // extrae las variables dentro de la cadena
                 }
+            }
+
+            for (int j = 0; j < cadenas.length; j++) { // Recorre cada una de las cadenas
+                // Analiza si hay una letra mayuscula seguida por un apostrofe
+                mayusApost = verificarCadenaMayusApost(cadenas[j]);
+                if (mayusApost) break;
             }
         }
     }
@@ -158,14 +163,18 @@ public class AnalizadorDeGramatica {
         String[] temp = variables.toArray(new String[0]);
         ArrayList <String> cadenas = todasLasCadenas();
 
+        if (mayusApost)
+            temp = ordenamiento(temp);
+
         String subcadena = "";
         for (int i = 0; i < cadenas.size(); i++) {
             String cadena = cadenas.get(i);
+
             for (int j = 0; j < temp.length; j++) {
                 if (cadena.contains(temp[j]))
                     cadena = cadena.replace(temp[j], "|");
-                if (cadena.contains("'"))
-                    cadena = cadena.replace("'", "");
+//                if (cadena.contains("'"))
+//                    cadena = cadena.replace("'", "");
             }
             cadena += "|";
 
@@ -200,6 +209,26 @@ public class AnalizadorDeGramatica {
                     terminales.add(subcadena);
             }
         }
+    }
+
+    private String[] ordenamiento(String[] variables) {
+        int j = 0;
+        String[] temp = new String[variables.length];
+        for (int i = 0; i < variables.length; i++) {
+            if (verificarCadenaMayusApost(variables[i])) {
+                temp[j] = variables[i];
+                j++;
+            }
+        }
+
+        for (int i = 0; i < variables.length; i++) {
+            if (!verificarCadenaMayusApost(variables[i])) {
+                temp[j] = variables[i];
+                j++;
+            }
+        }
+
+        return temp;
     }
 
     private ArrayList<String> todasLasCadenas() {
