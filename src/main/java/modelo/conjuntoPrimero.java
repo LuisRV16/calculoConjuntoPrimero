@@ -54,7 +54,6 @@ public class conjuntoPrimero extends AnalizadorDeGramatica {
                      status = 0;
                  }
 
-                 System.out.println("status: " + status);
                  if (status == 1) {
                      variables.add(temp[i]+"'");
                      String[] bn = {temp[i] + "'"};
@@ -87,7 +86,6 @@ public class conjuntoPrimero extends AnalizadorDeGramatica {
         String subcadena = "";
         boolean isVar = false;
         if (!cadena.equals("[]")) {
-
             for (int i = 0; i < var.length; i++) {
                 if (cadena.length() >= 2) {
                     subcadena = cadena.substring(0, 2);
@@ -139,7 +137,7 @@ public class conjuntoPrimero extends AnalizadorDeGramatica {
         setInicial();
 
         resultadoCompleto.append("V = {").append(getVariables()).append("}\n").append("T = {").append(getTerminales())
-                .append("}\n").append("S = ").append(getInicial());
+                .append("}\n").append("S = ").append(getInicial()).append("\n");
 
         String s = resultadoCompleto.toString().replace("[", "").replace("]", "");
 

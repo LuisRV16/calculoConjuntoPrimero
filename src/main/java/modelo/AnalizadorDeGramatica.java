@@ -158,7 +158,7 @@ public class AnalizadorDeGramatica {
     // Hasta aquí finaliza todo lo de variables
     // Inician las terminales
 
-    // Almacenar terminables: 40 lineas, mi record
+    // Almacenar terminables: 40 lineas, mi record | Actualizacion 15/02/2024: ahora son 53 pipipipi pero funciona al maximo
     public void almacenarTerminales () {
         String[] temp = variables.toArray(new String[0]);
         ArrayList <String> cadenas = todasLasCadenas();
@@ -173,8 +173,6 @@ public class AnalizadorDeGramatica {
             for (int j = 0; j < temp.length; j++) {
                 if (cadena.contains(temp[j]))
                     cadena = cadena.replace(temp[j], "|");
-//                if (cadena.contains("'"))
-//                    cadena = cadena.replace("'", "");
             }
             cadena += "|";
 
@@ -203,10 +201,14 @@ public class AnalizadorDeGramatica {
                 subcadena = cadenasDeVarioSimbolos.get(i);
                 for (String simbolo : cadenasDeUnSimbolo) {
                     if (subcadena.contains(simbolo))
-                        subcadena = subcadena.replace(simbolo, "");
+                        subcadena = subcadena.replace(simbolo, "|");
                 }
-                if (subcadena.length() >= 1)
-                    terminales.add(subcadena);
+                String[] terminalesApartadas = subcadena.split("\\|");
+
+                for (String terminal: terminalesApartadas) {
+                    if (!terminal.equals(""))
+                        terminales.add(terminal);
+                }
             }
         }
     }
