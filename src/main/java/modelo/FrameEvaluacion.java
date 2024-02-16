@@ -1,9 +1,6 @@
 package modelo;
 
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 public class FrameEvaluacion extends javax.swing.JFrame {
@@ -95,7 +92,7 @@ public class FrameEvaluacion extends javax.swing.JFrame {
         String gramatica = txtaGramatica.getText();
         txtaResultados.setForeground(Color.black);
         try {
-            conjuntoPrimero cP = new conjuntoPrimero(gramatica);
+            ConjuntoPrimero cP = new ConjuntoPrimero(gramatica);
             txtaResultados.setText(cP.calculoConjuntoPrimero());
         } catch (Exception e) {
             txtaResultados.setForeground(Color.red);

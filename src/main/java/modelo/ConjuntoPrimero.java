@@ -2,11 +2,11 @@ package modelo;
 
 import java.util.ArrayList;
 
-public class conjuntoPrimero extends AnalizadorDeGramatica {
+public class ConjuntoPrimero extends AnalizadorDeGramatica {
 
-    public conjuntoPrimero() {super();}
+    public ConjuntoPrimero() {super();}
 
-    public conjuntoPrimero(String gramatica) {super(gramatica);}
+    public ConjuntoPrimero(String gramatica) {super(gramatica);}
 
     protected boolean isRecursivoIzq(String v, String[] cadenas) {
         for (String cadena : cadenas) {
@@ -80,7 +80,7 @@ public class conjuntoPrimero extends AnalizadorDeGramatica {
         return status;
     }
 
-    private String conjuntoPrimeroCadena (String cadena) {
+    protected String conjuntoPrimeroCadena (String cadena) {
         String[] var = variables.toArray(new String[0]);
         String[] term = terminales.toArray(new String[0]);
         String subcadena = "";
