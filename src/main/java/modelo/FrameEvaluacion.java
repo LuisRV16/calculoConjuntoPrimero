@@ -92,8 +92,8 @@ public class FrameEvaluacion extends javax.swing.JFrame {
         String gramatica = txtaGramatica.getText();
         txtaResultados.setForeground(Color.black);
         try {
-            ConjuntoPrimero cP = new ConjuntoPrimero(gramatica);
-            txtaResultados.setText(cP.calculoConjuntoPrimero());
+            ConjuntoSiguiente gram = new ConjuntoSiguiente(gramatica);
+            txtaResultados.setText(gram.calculoConjuntoSiguiente());
         } catch (Exception e) {
             txtaResultados.setForeground(Color.red);
             txtaResultados.setText("Introduzca una grámatica válida.");
