@@ -80,7 +80,7 @@ public class ConjuntoPrimero extends AnalizadorDeGramatica {
         return status;
     }
 
-    protected String conjuntoPrimeroCadena (String cadena) {
+    protected String conjuntoPrimeroCadena (String variable, String cadena) {
         String[] var = variables.toArray(new String[0]);
         String[] term = terminales.toArray(new String[0]);
         String subcadena = "";
@@ -111,10 +111,19 @@ public class ConjuntoPrimero extends AnalizadorDeGramatica {
                     }
                 }
             } else {
-                String[] cadenas = cadenasGeneradas.get(subcadena);
+                String variableBusq = subcadena;
+                String[] cadenas = cadenasGeneradas.get(variableBusq);
                 subcadena = "";
                 for (int i = 0; i < cadenas.length; i++) {
-                    subcadena += (conjuntoPrimeroCadena(cadenas[i]) + ", ");
+                    if (cadenas[i].contains(variable)) {
+                        String aux = cadenas[i].replace(variable, "|");
+                        int index = aux.indexOf("|");
+                        if (index != 0) {
+                            subcadena += (conjuntoPrimeroCadena(variableBusq, cadenas[i]) + ", ");
+                        }
+                    } else {
+                        subcadena += (conjuntoPrimeroCadena(variableBusq, cadenas[i]) + ", ");
+                    }
                 }
             }
         } else {
@@ -157,12 +166,12 @@ public class ConjuntoPrimero extends AnalizadorDeGramatica {
             for (int i = 0; i < var.length; i++) {
                 String[] cadenas = cadenasGeneradas.get(var[i]);
                 for (int j = 0; j < cadenas.length; j++) {
-                    String cadena = conjuntoPrimeroCadena(cadenas[j]);
+                    String cadena = conjuntoPrimeroCadena(var[i], cadenas[j]);
                     if (cadena.contains(", ,")) {
                         cadena = cadena.replaceAll(", ,", ",");
                     }
                     if (cadena.length() >= 3){
-                        String s1 = cadena.substring(cadena.length() - 2, cadena.length());;
+                        String s1 = cadena.substring(cadena.length() - 2);;
                         if (s1.equals(", ")) {
                             cadena = cadena.substring(0, cadena.length() - 2);
                         }
