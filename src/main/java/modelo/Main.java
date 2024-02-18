@@ -14,9 +14,9 @@ public class Main {
 
         String gramatica =
                 """
-                        S → 0S0| 01
-                        A → SB|0
-                        B →1
+                        S → baBA|a
+                        A → Sb|ε
+                        B → abba
                         """;
 
 //        System.out.println(gramatica);

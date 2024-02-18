@@ -21,11 +21,11 @@ public class ConjuntoSiguiente extends ConjuntoPrimero {
             String[] cadenas = cadenasGeneradas.get(var);
             for (String cadena : cadenas) {
                 String subcadena = "";
-                if (cadena.contains(variable) && !variable.equals(var)) {
+                if (cadena.contains(variable)) {
                     subcadena = cadena.replace(variable, "|");
                     int index = subcadena.indexOf("|");
                     if (index == subcadena.length() - 1) {
-                        if (!variableAnterior.equals(var)) {
+                        if (!variable.equals(var) && !variableAnterior.equals(var)) {
                             res += conjuntoSiguienteVariable(variable, var) + ", ";
                         }
                     } else {
